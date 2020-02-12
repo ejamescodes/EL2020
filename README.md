@@ -1,1 +1,1 @@
-###### ![New Paltz Logo](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg)
+#### ![New Paltz Logo](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg) ####

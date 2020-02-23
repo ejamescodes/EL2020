@@ -5,15 +5,25 @@ DIR = 20   # Direction GPIO Pin
 STEP = 21  # Step GPIO Pin
 CW = 1     # Clockwise Rotation
 CCW = 0    # Counterclockwise Rotation
-SPR = 48   # Steps per Revolution (360 / 7.5)
+SPR =800   # Steps per Revolution (360 / 7.5)
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(STEP, GPIO.OUT)
 GPIO.output(DIR, CW)
 
+MODE = (14, 15, 18)   # Microstep Resolution GPIO Pins
+GPIO.setup(MODE, GPIO.OUT)
+RESOLUTION = {'Full': (0, 0, 0),
+              'Half': (1, 0, 0),
+              '1/4': (0, 1, 0),
+              '1/8': (1, 1, 0),
+              '1/16': (0, 0, 1),
+              '1/32': (1, 0, 1)}
+GPIO.output(MODE, RESOLUTION['Full'])
+
 step_count = SPR
-delay = .0208
+delay = .0208/40
 
 for x in range(step_count):
     GPIO.output(STEP, GPIO.HIGH)
@@ -21,6 +31,7 @@ for x in range(step_count):
     GPIO.output(STEP, GPIO.LOW)
     sleep(delay)
 
+GPIO.output(DIR, CCW)
 sleep(.5)
 GPIO.output(DIR, CCW)
 for x in range(step_count):

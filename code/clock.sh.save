@@ -4,51 +4,56 @@ clear
 
 function usage {
 
+start_time=''
+current_time=''
+end_time=''
+
 if [ "$1" = "clock" ] ; then
-	echo "$(date)"
+	let start_time=$(date +%s)
+	let current_time=$(date +%s)+5
+	echo $start_time
+	echo $current_time
 elif [ "$1"  = "timer" ] ; then
 	read -p 'How long would you like to set the timer?(hh:mm:ss) : ' time
-	let H=${time:0:2}*3600
-	let M=${time: -5:-3}*60
-	let S=${time:6}
+	let h=${time:0:2}*3600
+	let m=${time:5}
+	let s=${time:6}
+	echo $h
+	echo $m
+	echo $s
 	read -p $'What is your musical preference?\n(1. Default | 2. Gaming | 3. Religious | 4. Italian | 5. Nietzsche): ' tone
 	let start_time=$(date +%s)
-	let current_time=$(date +%s)
-	let end_time=H+M+S+start_time
+	let end_time=h+m+s+start_time
 	echo $start_time
 	echo $end_time
-	while [ $current_time -lt $end_time ]
+	while [ 1 -ne 0 ]
 	do
-		let current_time=$(date +%s)
-		let count=$end_time-$current_time
-		let H=count/3600
-		let M=count%3600/60
-		let S=count%3600%60
-		echo "$H h:$M m:$S s"
+		echo $(date)
 	done
 	sound $tone
+	
 else 
 	echo Options: clock, timer
 fi
 }
 
+
 function sound {
 if [ $tone = '1' ] ; then
-        omxplayer -o local audio/wry.mp3
+        echo 1
 elif [ $tone = '2' ] ; then
-        omxplayer -o local audio/mii.mp3
+        echo 2
 elif [ $tone = '3' ] ; then
-        omxplayer -o local audio/waluigi.mp3
+        echo 3
 elif [ $tone = '4' ] ; then
-	omxplayer -o local audio/giorno.mp3
+	echo 4
 elif [ $tone = '5' ] ; then
 	omxplayer -o local audio/god_is_dead_OwO.mp3
 else
-	omxplayer -o local audio/wry.mp3
+	echo default
 fi
 }
 
 usage $1
+
 echo --END--
-
-

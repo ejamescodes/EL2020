@@ -1,12 +1,11 @@
 from time import sleep
 import RPi.GPIO as GPIO
-import os
 
 DIR = 20   # Direction GPIO Pin
 STEP = 21  # Step GPIO Pin
 CW = 1     # Clockwise Rotation
 CCW = 0    # Counterclockwise Rotation
-SPR = 400   # Steps per Revolution (360 / 7.5)
+SPR =800   # Steps per Revolution (360 / 7.5)
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(DIR, GPIO.OUT)
@@ -21,33 +20,24 @@ RESOLUTION = {'Full': (0, 0, 0),
               '1/8': (1, 1, 0),
               '1/16': (0, 0, 1),
               '1/32': (1, 0, 1)}
-GPIO.output(MODE, RESOLUTION['1/32'])
+GPIO.output(MODE, RESOLUTION['Full'])
 
 step_count = SPR
-delay = 0.00005/64
+delay = .0208/40
 
-def cc():
-	for x in range(step_count):
-		GPIO.output(STEP, GPIO.HIGH)
-    		sleep(delay)
-    		GPIO.output(STEP, GPIO.LOW)
-    		sleep(delay)
+for x in range(step_count):
+    GPIO.output(STEP, GPIO.HIGH)
+    sleep(delay)
+    GPIO.output(STEP, GPIO.LOW)
+    sleep(delay)
 
-try:
-	while True:
-		cc()
+GPIO.output(DIR, CCW)
+sleep(.5)
+GPIO.output(DIR, CCW)
+for x in range(step_count):
+    GPIO.output(STEP, GPIO.HIGH)
+    sleep(delay)
+    GPIO.output(STEP, GPIO.LOW)
+    sleep(delay)
 
-except KeyboardInterrupt:
-	os.system('clear')
-	print('--END--')
-	GPIO.cleanup()
-#GPIO.output(DIR, CCW)
-#sleep(.5)
-#GPIO.output(DIR, CCW)
-#for x in range(step_count):
-#    GPIO.output(STEP, GPIO.HIGH)
-#    sleep(delay)
-#    GPIO.output(STEP, GPIO.LOW)
-#    sleep(delay)
-
-#GPIO.cleanup()
+GPIO.cleanup()

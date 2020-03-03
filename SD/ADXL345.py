@@ -60,6 +60,11 @@ if zAccl > 511 :
 	zAccl -= 1024
 
 # Output data to screen
-print "Acceleration in X-Axis : %d" %xAccl
-print "Acceleration in Y-Axis : %d" %yAccl
-print "Acceleration in Z-Axis : %d" %zAccl
+while 1 > 0:
+	count = 0
+	print "Acceleration in X-Axis : %d" %xAccl
+	print "Acceleration in Y-Axis : %d" %yAccl
+	print "Acceleration in Z-Axis : %d" %zAccl
+	while  count <  35:
+		print " "
+	count = 0

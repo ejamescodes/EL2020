@@ -8,8 +8,5 @@
 #####    Year: Senior
 ##### 2. **Class Start Date** Jan 21, 2020
 ##### 3. **Class End Date** May 6, 2020
-##### The Bash script clock.sh takes 1 argument either, clock, or timer
-##### - If the user chooses clock, the script will return the date and time
-##### - If the user selects timer, the user will be prompted for a time
-#####   - After the user selects a time they will be prompted to choose which tone they want to use
-#####   - When time is up the script will play the selected tone
+##### The python code blink_temp.py loops and waits for an input from the touch sensor
+##### - If the sensor reads high it blinks an LED, prints push, and reads the temperature from a temperature and humidity sensor

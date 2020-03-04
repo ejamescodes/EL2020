@@ -1,7 +1,8 @@
 #Import Libraries we will be using
 import RPi.GPIO as GPIO
-import Adafruit_DHT
+import Adafruit_DHT as DHT
 import time
+import signal
 import os
 #Assign GPIO pins
 redPin = 27
@@ -9,7 +10,7 @@ tempPin = 17
 buttonPin = 26
 
 #Temp and Humidity Sensor
-tempSensor = Adafruit_DHT.DHT11
+tempSensor = DHT.DHT11
 #LED Variables--------------------------------------------------------
 #Duration of each Blink
 blinkDur = .1
@@ -20,6 +21,7 @@ blinkTime = 7
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(redPin,GPIO.OUT)
 GPIO.setup(buttonPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
 def oneBlink(pin):
 	GPIO.output(pin,True)
 	time.sleep(blinkDur)
@@ -27,7 +29,7 @@ def oneBlink(pin):
 	time.sleep(blinkDur)
 
 def readF(tempPin):
-	humidity, temperature = Adafruit_DHT.read_retry(tempSensor,tempPin)
+	humidity, temperature = DHT.read_retry(tempSensor,17)
 	temperature = temperature * 9/5.0 +32
 	if humidity is not None and temperature is not None:
 		tempFahr = '{0:0.1f}*F'.format(temperature)
@@ -38,7 +40,8 @@ def readF(tempPin):
 try:
 	while True:
 		input_state = GPIO.input(buttonPin)
-		if input_state == GPIO.HIGH:
+		if GPIO.input(buttonPin) == GPIO.HIGH:
+			print('push')
 			for i in range (blinkTime):
 				oneBlink(redPin)
 			time.sleep(.2)

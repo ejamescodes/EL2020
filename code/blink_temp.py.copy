@@ -36,20 +36,13 @@ def readF(tempPin):
 		print('Error Reading Sensor')
 	return tempFahr
 
-con = mydb.connect('../log/tempLog.db')
-cur = con.cursor()
-cur.execute("""CREATE TABLE IF NOT EXISTS tempLog(Date varchar(255), Data varchar(255))""")
 try:
-	with open("../log/tempLog.csv", "a") as log:
-		
+	with open("../log/templog.csv", "a") as log:
 		while True:
 			data = "mock data"
 			print ("reading mock data")
-			cur.execute('INSERT INTO tempLog values(?,?)',(time.strftime('%Y-%m-%d %H:%M:%S'), data))
-			con.commit()
-			table = con.execute("select * from tempLog")
 			log.write("{0},{1}\n".format(time.strftime("%Y‐%m‐%d %H:%M:%S"),str(data)))
-			time.sleep(10)
+			time.sleep(60)
 
 except KeyboardInterrupt:
 	os.system('clear')

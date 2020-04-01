@@ -49,7 +49,7 @@ try:
 			con.commit()
 			table = con.execute("select * from tempLog")
 			log.write("{0},{1}\n".format(time.strftime("%Y‐%m‐%d %H:%M:%S"),str(data)))
-			time.sleep(10)
+			time.sleep(60)
 
 except KeyboardInterrupt:
 	os.system('clear')

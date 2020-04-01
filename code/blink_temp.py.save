@@ -39,10 +39,10 @@ def readF(tempPin):
 try:
 	with open("../log/templog.csv", "a") as log:
 		while True:
-			data = "mock data"
-			print ("reading mock data")
+			data = readF(tempPin)
+			print (data)
 			log.write("{0},{1}\n".format(time.strftime("%Y‐%m‐%d %H:%M:%S"),str(data)))
-			time.sleep(60)
+			sleep(60)
 
 except KeyboardInterrupt:
 	os.system('clear')

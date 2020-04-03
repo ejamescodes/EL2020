@@ -8,5 +8,7 @@
 #####    Year: Senior
 ##### 2. **Class Start Date** Jan 21, 2020
 ##### 3. **Class End Date** May 6, 2020
-##### The python code blink_temp.py loops and waits for an input from the touch sensor
-##### - If the sensor reads high it blinks an LED, prints push, and reads the temperature from a temperature and humidity sensor
+##### The code takes a reading from a temperature sensor and logs it to a database, tempLog.db
+##### A flask server reads the content of the database and sends it to be dislayed client side via index.html
+##### index.html also has a button when pressed sends a request to the server to execute python code that blinks an LED
+##### - My temperature sensor malfunctioned so I loaded the database with mock data

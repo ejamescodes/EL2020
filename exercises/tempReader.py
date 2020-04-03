@@ -36,15 +36,35 @@ def readF(tempPin):
 		print('Error Reading Sensor')
 	return tempFahr
 
+con = mydb.connect('../log/tempLog.db')
+cur = con.cursor()
+cur.execute("""CREATE TABLE IF NOT EXISTS tempLog(Date INTTEGER, Temperature INTEGER)""")
+data = 60
+state = True
 try:
-	with open("../log/templog.csv", "a") as log:
-		while True:
-			data = readF(tempPin)
-			print (data)
-			log.write("{0},{1}\n".format(time.strftime("%Y‐%m‐%d %H:%M:%S"),str(data)))
-			sleep(60)
+#	with open("../log/tempLog.csv", "a") as log:
+	while True:
+#		os.system('clear')
+#			print ("reading mock data")
+		cur.execute('INSERT INTO tempLog (Date, Temperature) VALUES(?,?)', (time.strftime('%Y-%m-%d %H:%M:%S'), data))
+		con.commit()
+			#log.write("{0},{1}\n".format(time.strftime("%Y‐%m‐%d %H:%M:%S"),str(data)))
+#		print (con.execute("SELECT * FROM tempLog"))
+		print (data)
+		if state == True:
+			if data < 80:
+				data+=5
+			else: 
+				state = False
+		else:
+			if data > 60:
+				data-=5
+			else:
+				state = True
+		time.sleep(60)
 
 except KeyboardInterrupt:
 	os.system('clear')
 	print('Thanks for Blinking and Thinking!')
 	GPIO.cleanup()
+	con.close()

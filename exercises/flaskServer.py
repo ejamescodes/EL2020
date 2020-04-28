@@ -36,5 +36,5 @@ def button():
 	os.system('python3 ../iot/blink.py')
 
 if __name__ == "__main__":
-	app.run(host='0.0.0.0', port=2020, debug=True)
+	app.run(host='0.0.0.0', port=2021, debug=True)
 

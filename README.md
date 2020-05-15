@@ -24,7 +24,11 @@
 ##### - 1x Sound Detection Sensor Module
 ##### ![Sound Detection Sensor Module](https://github.com/ejamescodes/EL2020/blob/final/Pictures/sound.PNG)
 ##### - 1x Vibration Sensor Module
+##### ![Vibration Sensor Module](https://github.com/ejamescodes/EL2020/blob/final/Pictures/vibration.PNG)
 ##### - 1x HC-SR501 Infrared PIR motion Sensor Module
+##### ![HC-SR501 Infrared PIR motion Sensor Module](https://github.com/ejamescodes/EL2020/blob/final/Pictures/IR.PNG)
 ##### - 1x Buzzer Alarm
+##### ![Buzzer Alarm](https://github.com/ejamescodes/EL2020/blob/final/Pictures/alarm.PNG)
 ##### - 1x Digital Touch Sensor Module
+##### ![Digital Touch Sensor Module](https://github.com/ejamescodes/EL2020/blob/final/Pictures/touch.PNG)
 ##### - Jumper Wires

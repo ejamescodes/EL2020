@@ -33,3 +33,5 @@
 ##### - 1x Digital Touch Sensor Module
 ##### ![Digital Touch Sensor Module](https://github.com/ejamescodes/EL2020/blob/final/Pictures/touch.PNG)
 ##### - Jumper Wires
+##### **Wiring**
+##### ![Wiring](https://github.com/ejamescodes/EL2020/blob/final/Pictures/circuit.PNG)

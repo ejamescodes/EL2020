@@ -22,6 +22,7 @@
 ##### Materials
 ##### - 1x Raspberry Pi (Here we used a Raspberry Pi 4)
 ##### - 1x Sound Detection Sensor Module
+##### ![Sound Detection Sensor Module](https://github.com/ejamescodes/EL2020/blob/final/Pictures/sound.PNG)
 ##### - 1x Vibration Sensor Module
 ##### - 1x HC-SR501 Infrared PIR motion Sensor Module
 ##### - 1x Buzzer Alarm

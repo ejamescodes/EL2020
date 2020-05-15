@@ -8,7 +8,14 @@
 #####    Year: Senior
 ##### 2. **Class Start Date** Jan 21, 2020
 ##### 3. **Class End Date** May 6, 2020
-##### The code takes a reading from a temperature sensor and logs it to a database, tempLog.db
+##### The security.py program waits on the user to activate the touch sensor.
+##### If the touch sensor is activated the sensor.py program starts
+##### Sensor.py waits for a reading from the sound, vibration, or infrared sensor
+##### If any of these sensors are activated then alarm sounds and it is logged to the database sensorLog.db
+##### The only way to disarm the alarm is through the web interface
 ##### A flask server reads the content of the database and sends it to be dislayed client side via index.html
-##### index.html also has a button when pressed sends a request to the server to execute python code that blinks an LED
-##### - My temperature sensor malfunctioned so I loaded the database with mock data
+##### index.html has two buttons, one for arming and one for disarming
+##### - When the arm button is pressed, it essentially does the same thing as the touch sensor and starts sensor.py
+##### - When the disarm button is pressed, it stops sensor.py from running
+##### ***How to operate***
+

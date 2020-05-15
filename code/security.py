@@ -41,34 +41,45 @@ def disarm():
 	trigger = 0
 	GPIO.output(alarm, True)
 
-def sensorStatus():
-	if GPIO.input(snd) or GPIO.input(vib) or GPIO.input(ir):
-		return 1
+#arms the system
+def arm():
+	arm = 1
 
+#Clears previous entries
 def clearLog():
 	os.system('rm ../log/sensorLog.db')
 
-con = mydb.connect('../log/sensorLog.db')
+#Tries to connect to a database. If there isn't one, it makes one
+con = mydb.connect('log/sensorLog.db')
 cur = con.cursor()
-cur.execute("""CREATE TABLE IF NOT EXISTS sensorLog(Date INTTEGER, Arm INTEGER, Trigger INTEGER)""")
+cur.execute("""CREATE TABLE IF NOT EXISTS sensorLog(Date INTEGER, Arm INTEGER, Trigger INTEGER)""")
 
 
 
 #Call the blinkOnce function above in a loop
 try:
+	#initializes state of alarm pin or it will sound in the beginning
 	GPIO.output(alarm, True)
+	arm = 0
+	trigger = 0
 	while True:
+		#checks to see if arming switch has been hit
 		if GPIO.input(tch) == GPIO.HIGH:
 			arm = 1
+		#checks to see if the system is armed
 		if arm == 1:
-			sensorStatus()
+			#checks if any of the sensors have been triggered
 			if GPIO.input(snd) or GPIO.input(vib) or GPIO.input(ir):
 				trigger = 1
+			#if the system has been triggered then it logs it to the sensorLog database and rings until the system is disarmed
 			if trigger == 1:
 				cur.execute('INSERT INTO sensorLog (Date, Arm, Trigger) VALUES(?,?,?)', (time.strftime('%Y-%m-%d %H:%M:%S'), arm, trigger))
+				con.commit()
 				print(time.strftime('%Y‐%m‐%d %H:%M:%S')+" Arm: %d Trigger: %d\n" %(arm, trigger))
 				ring()
-		print(GPIO.input(ir))
+
+		cur.execute('INSERT INTO sensorLog (Date, Arm, Trigger) VALUES(?,?,?)', (time.strftime('%Y-%m-%d %H:%M:%S'), arm, trigger))
+		con.commit()
 		print(time.strftime('%Y‐%m‐%d %H:%M:%S')+" Arm: %d Trigger: %d\n" %(arm, trigger))
 		time.sleep(.5)
 

@@ -25,8 +25,6 @@
 		<script type='text/javascript'>
 			//Load the charts libraries
 			google.charts.load('current', {packages:['table']});
-			google.charts.setOnLoadCallback(drawTable);			
-
 			//create empty array as a global
 			var chartData = [];
 					
@@ -51,34 +49,27 @@
 
 			//grabs the data from the sqlData app.route and pushes it into an array
 			function getData(){
-				$.ajax({
-					success: function (response) {
-						//Clear the array first
-						chartData = [];
-						$.getJSON('/sqlData', function(chartJSON) {
-							//console.log(chartJSON);
-							for (i = chartJSON.length-1; i < chartJSON.length; i++){
-								chartData.push([new Date(chartJSON[i].Date), chartJSON[i].Arm, chartJSON[i].Trigger]);
-							};
-							chartData.push([null, null, null, null]);
-							drawTable();
-						});
-						setTimeout(getData() ,500);
-					}
+				//Clear the array first
+				chartData = [];
+				$.getJSON('/sqlData', function(chartJSON) {
+					console.log(chartJSON);
+					for (i = chartJSON.length-1; i < chartJSON.length; i++){
+						chartData.push([new Date(chartJSON[i].Date), chartJSON[i].Arm, chart.JSON[i].Trigger]);
+					};
+					drawTable();
 				});
-			}
+			}  
 	        
 	        	//Draws the table
 		        function drawTable() {
 				var data = new google.visualization.DataTable();
 				data.addColumn('date', 'Date');
 				data.addColumn('number', 'Arm');
-				data.addColumn('number', 'Trigger');
+				data.addColumn('number', Trigger);
 				data.addRows(chartData);
 
 				var table = new google.visualization.Table(document.getElementById('table'));
-
-			        table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
+				table.draw(data, showRowNumber: false, width: '100%' , height: '100%'});
 			}
 
 		</script>

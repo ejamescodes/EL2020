@@ -20,15 +20,14 @@ def index():
 
 @app.route("/sqlData")
 def chartData():
-	con = sql.connect('../log/tempLog.db')
+	con = sql.connect('log/sensorLog.db')
 	cur = con.cursor()
 	con.row_factory = sql.Row
-	cur.execute("SELECT Date, Temperature FROM tempLog WHERE Temperature > 60")
+	cur.execute("SELECT * FROM sensorLog")
 	dataset = cur.fetchall()
-	print (dataset)
 	chartData = []
 	for row in dataset:
-		chartData.append({"Date": row[0], "Temperature": float(row[1])})
+		chartData.append({"Date": row[0], "Arm": row[1], "Trigger": row[2]})
 	return Response(json.dumps(chartData), mimetype='application/json')
 
 @app.route("/button")

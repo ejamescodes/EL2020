@@ -35,3 +35,9 @@
 ##### - Jumper Wires
 ##### **Wiring**
 ##### ![Wiring](https://github.com/ejamescodes/EL2020/blob/final/Pictures/circuit.PNG)
+##### **How to Operate**
+##### 1. Power on and allow IR sensor to acclimate to room temperature
+##### 2. Run security.py
+##### 3. Run flaskServer.py
+##### 4. Arm system either through touch sensor or web interface
+##### ![web](https://github.com/ejamescodes/EL2020/blob/final/Pictures/web%20interface.PNG)

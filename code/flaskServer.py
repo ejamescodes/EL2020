@@ -30,9 +30,20 @@ def chartData():
 		chartData.append({"Date": row[0], "Arm": row[1], "Trigger": row[2]})
 	return Response(json.dumps(chartData), mimetype='application/json')
 
-@app.route("/button")
-def button():
-	os.system('python3 ../iot/blink.py')
+@app.route("/arm")
+def arm():
+	try:
+		os.system('python3 sensor.py')
+	except:
+		print('error has occurred')
+
+@app.route("/disarm")
+def disarm():
+	try:
+		os.system('pkill -9 -f sensor.py')
+		os.system('pkill -9 -f security.py')
+	except:
+		print('error has occurred')
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=2020, debug=True)

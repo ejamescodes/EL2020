@@ -17,7 +17,7 @@
 
 		<center>
 			<div id="button">
-				<input onClick="arm()" type="button" value="Arm" style="width: 250px; height: 100px; font-size: 30px "><input onClick="disarm()" type="button" value="Disarm" style="width: 250px; height: 100px; font-size: 30px ">
+				<input onClick="button()" type="button" value="Disarm" style="width: 250px; height: 100px; font-size: 30px "><input onClick="button()" type="button" value="Arm" style="width: 250px; height: 100px; font-size: 30px ">
 			</div>
 			<div id="table" style="width: 750px; height: 100px"></div>
 		</center>
@@ -27,42 +27,20 @@
 			google.charts.load('current', {packages:['table']});
 			google.charts.setOnLoadCallback(drawTable);			
 
-			var today = new Date();
-			var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-			var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-			var dateTime = date+' '+time;
+			//create empty array as a global
 			var chartData = [];
-
-			function arm(){
+					
+			function button(){
 				var xhr = new XMLHttpRequest();
-				xhr.open("GET","/arm", true);
-				xhr.send();
-				getData();	
-			}
-
-			function disarm(){
-						chartData = [];
-						chartData.push([dateTime, 0, 0]);
-						drawTable();
-                        	        	var xhr = new XMLHttpRequest();
-                                		xhr.open("GET","/disarm", true);
-                                		xhr.send();
-	        
+				xhr.open("GET","/button", true);
+				xhr.send();	
 			}
 			
 			//This function is called when the page loads
 			function go(){
 				goTime = new Date();
 				console.log('It\'s Go Time! '+goTime);
-//				$.ajax({
- //                               	success: function (response) {
-                                        	chartData = [];
-                                        	chartData.push([dateTime, 0, 0]);
-                                       		drawTable();
- //                                      		setTimeout(getData(), 500);
-   //                             	}
-     //                   	});
-//				getData();
+				getData();
 				setInterval(function() {
 					xTime = new Date();
 					console.clear();
@@ -73,27 +51,27 @@
 
 			//grabs the data from the sqlData app.route and pushes it into an array
 			function getData(){
-//				$.ajax({
-//					success: function (response) {
+	$.ajax({
+					success: function (response) {
 						//Clear the array first
 						chartData = [];
 						$.getJSON('/sqlData', function(chartJSON) {
 							//console.log(chartJSON);
 							for (i = chartJSON.length-1; i < chartJSON.length; i++){
-								chartData.push([chartJSON[i].Date, chartJSON[i].Arm, chartJSON[i].Trigger]);
+								chartData.push([new Date(chartJSON[i].Date), chartJSON[i].Arm, chartJSON[i].Trigger]);
 							};
-//							chartData.push([null, null, null, null]);
+							chartData.push([null, null, null, null]);
 							drawTable();
 						});
-//						setTimeout(getData(), 1000);
-//					}
-//				});
+						setTimeout(getData() ,500);
+					}
+				});
 			}
 	        
 	        	//Draws the table
 		        function drawTable() {
 				var data = new google.visualization.DataTable();
-				data.addColumn('string', 'Date');
+				data.addColumn('date', 'Date');
 				data.addColumn('number', 'Arm');
 				data.addColumn('number', 'Trigger');
 				data.addRows(chartData);

@@ -21,6 +21,7 @@
 ##### **How to build**
 ##### Materials
 ##### - 1x Raspberry Pi (Here we used a Raspberry Pi 4)
+##### ![Raspberry Pi 4](https://images-na.ssl-images-amazon.com/images/I/71IOISwSYZL._AC_SL1400_.jpg)
 ##### - 1x Sound Detection Sensor Module
 ##### ![Sound Detection Sensor Module](https://github.com/ejamescodes/EL2020/blob/final/Pictures/sound.PNG)
 ##### - 1x Vibration Sensor Module
